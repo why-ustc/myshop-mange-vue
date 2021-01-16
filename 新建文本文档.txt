@@ -1,0 +1,60 @@
+1：配置element-ui: 初始化项目后，在仪表盘->插件->添加 vue-cli-plugin-element 插件
+    app.js->根组件  main.js项目入口文件
+
+2：配置axios: 仪表盘安装依赖->运行依赖-> axios安装
+
+3: 如果要解除 eslint 的语法检测限制， 就将 根目录下的 .editorconfig 中的代码删除
+
+4: 登录界面不需要 token，其余页面都需要，必须在 路由文件index.js 中设置 路由守卫
+
+5：home 界面中:
+    (1)保证同时只有一个子菜单 展开： Menu Attribute 中的 unique-opened 置为 true
+    (2)点击某 一级菜单，要保证只有这个菜单的 子菜单展开，既要绑定 一个 index，确保唯一性，注意 :index="id" 才有用
+
+6: 外部图标库：将 fonts各种图标文件夹 复制到 src/assets 下， fonts各种图标\demo_fontclass.html 此文件下就是各种外部图标。
+               并按照其要求进行使用
+
+7: 每当某个地方要被其他组件数据代替，就将其内容换成 <router-view><> 占位符。
+       比如：home组件中 main部分 要被 welcome代替，则main 换成<router-view><>
+
+8: 关于home 组件左侧菜单高亮效果 的激活的设置： activePath 储存到:window.sessionStorage.setItem('activePath',activePath),
+    再到 created()函数中 赋值给 menu 中的属性：default-active
+
+9：关于分页功能中的俩个函数：@size-change="handleSizeChange" @current-change="handleCurrentChange"，
+    handleSizeChange(newsize):每页数据量改变时会自动得到新的每页展示数据newsize，当前页数改变函数同理
+
+10: 值得重新做的部分：
+        user组件中：分页功能 + 更新用户状态功能 + 搜索功能(直接绑定 getUserList()函数 + 双向绑定 搜索数据 query)
+
+11: 路径太长的话 注意用 `` 代替 ' '
+
+12: this.$message.error/success/info/warning().
+    this.$confirm.error/success/info/warning().--用于确认是否删除某信息
+
+13：作用域插槽 使用时机：
+                    <!-- 使用 作用域插槽 自定义 输出格式 -->
+                    <!-- 因为表格其他列就是 用对象数组 rightsList 中的某属性作为列中数据，而此列不同里面要放 tag，所以必须使用 作用域插槽 -->
+                    <template slot-scope="scope"><> {{scope.row 可以表示这行全部数据}}
+
+14: axios 各种不同方式 参数的传递形式
+
+15: 商品管理菜单-->商品分类功能：
+        Vue-ui 操作盘的 运行依赖->下载 vue-table-with-tree-grid->查看API + example.vue
+    来使用其功能。
+
+16：商品管理菜单-->商品分类功能->添加分类按钮-->element-ui 中的级联选择器组件
+
+
+
+
+
+
+17：项目页面写完，
+        ① 给项目增加一个 加载的效果，即当打开不同页面时，最上面会有一个一闪而过的 加载条
+        下载运行依赖：nprogress->。在 main.js 中的(axios请求过程) 进行 进度条的显示(axios请求的发起request) 与隐藏(请求的response)
+
+        ② Vue ui 仪表盘中的 运行警告，进行处理
+
+        ③ Vue ui 仪表盘中的 编译警告，进行处理
+
+        ④ 在根目录下创建 vue.config.js
